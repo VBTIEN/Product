@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 public class Product {
+    @NotNull(message = "ID không được để trống")
+    @Min(value = 1, message = "ID phải là số nguyên dương lớn hơn 0")
     private int id;
 
     @NotBlank(message = "Tên sản phẩm không được để trống")

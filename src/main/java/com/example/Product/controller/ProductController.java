@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -92,10 +93,18 @@ public class ProductController {
     }
     
     /*Delete*/
-    @GetMapping("delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") int id, Model model) {
         Product product = productService.get(id);
         productService.deleteProduct(product);
         return "redirect:/products";
+    }
+    
+    /*Search*/
+    @GetMapping("/search")
+    public String searchProduct(String query, Model model) {
+        List<Product> searchResults = productService.searchProducts(query);
+        model.addAttribute("listproduct", searchResults);
+        return "products/search";
     }
 }
